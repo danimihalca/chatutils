@@ -3,6 +3,7 @@
 
 #include <cstdarg>
 #include <cstdio>
+#include <cstring>
 
 #ifdef ANDROID
  #include <android/log.h>
