@@ -2,6 +2,7 @@
 #define USER_H
 
 #include <string>
+#include <vector>
 
 class AbstractUser
 {
@@ -20,7 +21,8 @@ class UserCredentials : public AbstractUser
 {
 public:
     UserCredentials() = default;
-    inline UserCredentials(const std::string& userName, const std::string& password);
+    inline UserCredentials(const std::string& userName,
+                           const std::string& password);
 
     inline const std::string& getPassword() const;
     inline void setPassword(const std::string& password);
@@ -49,10 +51,15 @@ private:
 class Contact : public AbstractUser
 {
 public:
+    Contact() = default;
     inline Contact(int                id,
-            const std::string& userName,
-            const std::string& fullName,
-            bool               isOnline);
+                   const std::string& userName,
+                   const std::string& fullName);
+
+    inline Contact(int                id,
+                   const std::string& userName,
+                   const std::string& fullName,
+                   bool               isOnline);
 
     inline bool isOnline() const;
     inline void setOnline(bool isOnline);
@@ -64,6 +71,8 @@ private:
     UserDetails m_details;
     bool m_isOnline;
 };
+
+typedef std::vector<Contact> Contacts;
 
 class User
 {
@@ -80,6 +89,6 @@ private:
     UserDetails m_userDetails;
 };
 
-    #include "User.ipp"
+#include "User.ipp"
 
 #endif //USER_H

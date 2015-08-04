@@ -15,11 +15,14 @@
     #define FUNCTION_NAME __PRETTY_FUNCTION__
 #endif
 
-#define log_debug(...) LogDebug(FUNCTION_NAME, __VA_ARGS__)
+#define LOG_DEBUG_METHOD LOG_DEBUG("\n");
+
+
+#define LOG_DEBUG(...) LogDebug(FUNCTION_NAME, __VA_ARGS__)
 
 inline void LogDebug(const char* tag, const char* format, ...)
 {
-#ifdef LOG_DEBUG
+#ifdef ENABLE_LOG_DEBUG
     va_list arguments;
     va_start(arguments,format);
 

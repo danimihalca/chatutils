@@ -55,6 +55,11 @@ void UserDetails::setFullName(const std::string& fullName)
 }
 
 
+Contact::Contact(int id, const std::string& userName, const std::string& fullName):
+    Contact(id,userName,fullName,false)
+{
+}
+
 Contact::Contact(int id, const std::string& userName, const std::string& fullName, bool isOnline) :
     AbstractUser(userName),
     m_details(id, fullName),
