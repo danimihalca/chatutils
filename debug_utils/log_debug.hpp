@@ -9,6 +9,11 @@
  #include <android/log.h>
 #endif
 
+#if WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+#include <windows.h>
+#include <debugapi.h>
+#endif
+
 #ifdef _MSC_VER
     #define FUNCTION_NAME __FUNCTION__
 #else
@@ -28,12 +33,19 @@ inline void LogDebug(const char* tag, const char* format, ...)
 
 #if defined(ANDROID)
     __android_log_vprint(ANDROID_LOG_DEBUG,tag,format,arguments);
-#elif defined(WINDOWS_PHONE)
-    wchar_t buffer[100];
-    _vsnwprintf_s(buffer, BUFFER_LENGTH, _TRUNCATE, format, arguments);
+#elif WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+
+	char buffer[100];
+	_vsnprintf_s(buffer, 100, 99, format, arguments);
+	wchar_t bufferW[100];
+
+	size_t ret;
+	mbstowcs_s(&ret, bufferW,100, buffer, 100);
+
     buffer[99] = '\0';
-    OutputDebugString(buffer);
+    OutputDebugString(bufferW);
 #else
+#define _CRT_SECURE_NO_WARNINGS
     char buffer[100];
     strcpy(buffer,"D/");
     strcat(buffer,tag);
