@@ -9,7 +9,7 @@
  #include <android/log.h>
 #endif
 
-#if WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+#if defined (WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
 #include <windows.h>
 #include <debugapi.h>
 #endif
@@ -19,6 +19,8 @@
 #else
     #define FUNCTION_NAME __PRETTY_FUNCTION__
 #endif
+
+#define DEBUG_BUFFER_SIZE 255
 
 #define LOG_DEBUG_METHOD LOG_DEBUG("\n");
 
@@ -33,20 +35,20 @@ inline void LogDebug(const char* tag, const char* format, ...)
 
 #if defined(ANDROID)
     __android_log_vprint(ANDROID_LOG_DEBUG,tag,format,arguments);
-#elif WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+#elif defined (WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
 
-	char buffer[100];
-	_vsnprintf_s(buffer, 100, 99, format, arguments);
-	wchar_t bufferW[100];
+        char buffer[DEBUG_BUFFER_SIZE];
+        _vsnprintf_s(buffer, DEBUG_BUFFER_SIZE, DEBUG_BUFFER_SIZE-1, format, arguments);
+        wchar_t bufferW[DEBUG_BUFFER_SIZE];
 
 	size_t ret;
-	mbstowcs_s(&ret, bufferW,100, buffer, 100);
+        mbstowcs_s(&ret, bufferW,DEBUG_BUFFER_SIZE, buffer, DEBUG_BUFFER_SIZE);
 
     buffer[99] = '\0';
     OutputDebugString(bufferW);
 #else
 #define _CRT_SECURE_NO_WARNINGS
-    char buffer[100];
+    char buffer[DEBUG_BUFFER_SIZE];
     strcpy(buffer,"D/");
     strcat(buffer,tag);
     strcat(buffer,": ");
