@@ -1,28 +1,34 @@
 #ifndef COMMON_JSON_PROTOCOL_H
 #define COMMON_JSON_PROTOCOL_H
 
-enum Chat_Action_Type
+enum REQUEST_ACTION_TYPE
 {
-    LOGIN_REQUEST = 0x100,
-    SEND_MESSAGE,
-    GET_CONTACTS_REQUEST,
-
-    LOGIN_RESPONSE = 0x200,
-    CONTACT_UPDATED,
-    CONTACT_LOGGED_IN,
-    CONTACT_LOGGED_OUT,
-    RECEIVE_MESSAGE,
-    GET_CONTACTS_RESPONSE
+    REQUEST_LOGIN = 0x100,
+    REQUEST_SEND_MESSAGE,
+    REQUEST_GET_CONTACTS,
 };
 
-enum Authentication_Status
+enum RESPONSE_ACTION_TYPE
+{
+    RESPONSE_LOGIN = 0x200,
+    RESPONSE_SEND_MESSAGE,
+    RESPONSE_CONTACT_UPDATED,
+    RESPONSE_CONTACT_STATE_CHANGED,
+    RESPONSE_GET_CONTACTS
+};
+
+enum AUTH_STATUS
 {
     AUTH_SUCCESSFUL = 0,
     AUTH_ALREADY_LOGGED_IN,
     AUTH_INVALID_CREDENTIALS
 };
 
-const char* const ACTION = "action";
+
+const char* const REQUEST_ACTION = "request_action";
+const char* const RESPONSE_ACTION = "response_action";
+
+const char* const CONTENT = "content";
 
 const char* const USER = "user";
 const char* const USER_CREDENTIALS = "user_credentials";
@@ -30,18 +36,19 @@ const char* const USER_DETAILS = "user_details";
 const char* const CONTACT ="contact";
 const char* const CONTACTS ="contacts";
 
-const char* const USER_ID= "id";
-const char* const USER_USERNAME = "username";
-const char* const USER_PASSWORD = "password";
-const char* const USER_FULLNAME = "fullname";
+const char* const ID= "id";
+const char* const USERNAME = "username";
+const char* const PASSWORD = "password";
+const char* const FIRSTNAME = "firstname";
+const char* const LASTNAME = "lastname";
 
-const char* const CONTACT_ONLINE = "online";
+const char* const STATE = "state";
 
 const char* const AUTHENTICATION_STATUS = "auth_status";
 
 const char* const MESSAGE = "message";
-const char* const MESSAGE_RECEIVER_ID= "receiver_id";
-const char* const MESSAGE_SENDER_ID= "sender_id";
+const char* const RECEIVER_ID= "receiver_id";
+const char* const SENDER_ID= "sender_id";
 const char* const MESSAGE_TEXT= "message_text";
 
 

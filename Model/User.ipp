@@ -1,25 +1,64 @@
 #include "User.hpp"
 
-const std::string& AbstractUser::getUserName() const
-{
-    return m_userName;
-}
 
-void AbstractUser::setUserName(const std::string& userName)
-{
-    m_userName = userName;
-}
 
-AbstractUser::AbstractUser(const std::string& userName) :
+BaseUser::BaseUser(int                id,
+                   const std::string& userName,
+                   const std::string& firstName,
+                   const std::string& lastName) :
     m_userName(userName)
 {
 }
 
+const std::string& BaseUser::getUserName() const
+{
+    return m_userName;
+}
 
-UserCredentials::UserCredentials(const std::string& userName, const std::string& password) :
-    AbstractUser(userName),
+void BaseUser::setUserName(const std::string& userName)
+{
+    m_userName = userName;
+}
+
+std::string BaseUser::getFirstName() const
+{
+    return m_firstName;
+}
+
+void BaseUser::setFirstName(const std::string& firstName)
+{
+    m_firstName = firstName;
+}
+
+std::string BaseUser::getLastName() const
+{
+    return m_lastName;
+}
+
+void BaseUser::setLastName(const std::string& lastName)
+{
+    m_lastName = lastName;
+}
+
+
+
+
+
+UserCredentials::UserCredentials(const std::string& userName,
+                                 const std::string& password) :
+    m_userName(userName),
     m_password(password)
 {
+}
+
+const std::string&UserCredentials::getUserName() const
+{
+    return m_userName;
+}
+
+void UserCredentials::setUserName(const std::string& userName)
+{
+    m_userName = userName;
 }
 
 const std::string& UserCredentials::getPassword() const
@@ -33,10 +72,18 @@ void UserCredentials::setPassword(const std::string& password)
 }
 
 
-UserDetails::UserDetails(int id, const std::string& fullName) :
+UserDetails::UserDetails(int                id,
+                         const std::string& firstName,
+                         const std::string& lastName) :
     m_id(id),
-    m_fullName(fullName)
+    m_firstName(firstName),
+    m_lastName(lastName)
 {
+}
+
+void UserDetails::setId(int id)
+{
+    m_id = id;
 }
 
 int UserDetails::getId() const
@@ -44,67 +91,66 @@ int UserDetails::getId() const
     return m_id;
 }
 
-const std::string& UserDetails::getFullName() const
+const std::string& UserDetails::getLastName() const
 {
-    return m_fullName;
+    return m_lastName;
 }
 
-void UserDetails::setFullName(const std::string& fullName)
+void UserDetails::setLastName(const std::string& lastName)
 {
-    m_fullName = fullName;
+    m_lastName = lastName;
+}
+const std::string& UserDetails::getFirstName() const
+{
+    return m_firstName;
 }
 
-
-Contact::Contact(int id, const std::string& userName, const std::string& fullName):
-    Contact(id,userName,fullName,false)
+void UserDetails::setFirstName(const std::string& firstName)
 {
-}
-
-Contact::Contact(int id, const std::string& userName, const std::string& fullName, bool isOnline) :
-    AbstractUser(userName),
-    m_details(id, fullName),
-    m_isOnline(isOnline)
-{
-}
-
-bool Contact::isOnline() const
-{
-    return m_isOnline;
-}
-
-void Contact::setOnline(bool isOnline)
-{
-    m_isOnline = isOnline;
-}
-
-const UserDetails& Contact::getDetails() const
-{
-    return m_details;
-}
-
-void Contact::setDetails(const UserDetails& details)
-{
-    m_details = details;
+    m_firstName = firstName;
 }
 
 
 
-const UserCredentials& User::getUserCredentials() const
+
+Contact::Contact(int                id,
+                 const std::string& userName,
+                 const std::string& firstName,
+                 const std::string& lastName,
+                 CONTACT_STATE      state) :
+    BaseUser(id,userName,firstName,lastName),
+    m_state(state)
 {
-    return m_userCredentials;
 }
 
-void User::setUserCredentials(const UserCredentials& userCredentials)
+CONTACT_STATE Contact::getState() const
 {
-    m_userCredentials = userCredentials;
+    return m_state;
 }
 
-const UserDetails& User::getUserDetails() const
+void Contact::setState(CONTACT_STATE state)
 {
-    return m_userDetails;
+    m_state = state;
 }
 
-void User::setUserDetails(const UserDetails& userDetails)
+
+
+User::User(int                id,
+           const std::string& userName,
+           const std::string& password,
+           const std::string& firstName,
+           const std::string& lastName) :
+    BaseUser(id,userName,firstName,lastName),
+    m_password(password)
 {
-    m_userDetails = userDetails;
+}
+
+const std::string& User::getPassword() const
+{
+    return m_password;
+}
+
+void User::setPassword(const std::string& password)
+{
+    m_password = password;
 }

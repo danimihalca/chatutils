@@ -1,34 +1,57 @@
 #ifndef USER_H
-#define USER_H
+ #define USER_H
 
-#include <string>
-#include <vector>
+ #include <string>
+ #include <vector>
 
-class AbstractUser
+enum CONTACT_STATE
+{
+    OFFLINE,
+    ONLINE
+};
+
+class BaseUser
 {
 public:
     inline const std::string& getUserName() const;
     inline void setUserName(const std::string& userName);
 
+    inline std::string getFirstName() const;
+    inline void setFirstName(const std::string& firstName);
+
+    inline std::string getLastName() const;
+    inline void setLastName(const std::string& lastName);
+
 protected:
-    AbstractUser() = default;
-    inline AbstractUser(const std::string& userName);
+    BaseUser() = default;
+    inline BaseUser(int                id,
+                    const std::string& userName,
+                    const std::string& firstName,
+                    const std::string& lastName);
+
 private:
     std::string m_userName;
+    std::string m_firstName;
+    std::string m_lastName;
+    int id;
+
 };
 
-class UserCredentials : public AbstractUser
+class UserCredentials
 {
 public:
-    UserCredentials() = default;
     inline UserCredentials(const std::string& userName,
                            const std::string& password);
+
+    inline const std::string& getUserName() const;
+    inline void setUserName(const std::string& userName);
 
     inline const std::string& getPassword() const;
     inline void setPassword(const std::string& password);
 
 private:
     std::string m_password;
+    std::string m_userName;
 };
 
 
@@ -37,58 +60,61 @@ class UserDetails
 {
 public:
     UserDetails() = default;
-    inline UserDetails(int id, const std::string& fullName);
+    inline UserDetails(int                id,
+                       const std::string& firstName,
+                       const std::string& lastName);
+
+    inline void setId(int id);
     inline int getId() const;
 
-    inline const std::string& getFullName() const;
-    inline void setFullName(const std::string& fullName);
+    inline const std::string& getFirstName() const;
+    inline void setFirstName(const std::string& firstName);
+
+    inline const std::string& getLastName() const;
+    inline void setLastName(const std::string& lastName);
+
 
 private:
     int m_id;
-    std::string m_fullName;
+    std::string m_firstName;
+    std::string m_lastName;
 };
 
-class Contact : public AbstractUser
+class Contact : public BaseUser
 {
 public:
     Contact() = default;
-    inline Contact(int                id,
-                   const std::string& userName,
-                   const std::string& fullName);
 
     inline Contact(int                id,
                    const std::string& userName,
-                   const std::string& fullName,
-                   bool               isOnline);
+                   const std::string& firstName,
+                   const std::string& lastName,
+                   CONTACT_STATE      state);
 
-    inline bool isOnline() const;
-    inline void setOnline(bool isOnline);
-
-    inline const UserDetails& getDetails() const;
-    inline void setDetails(const UserDetails& details);
+    inline CONTACT_STATE getState() const;
+    inline void setState(CONTACT_STATE state);
 
 private:
-    UserDetails m_details;
-    bool m_isOnline;
+    CONTACT_STATE m_state;
 };
 
-typedef std::vector<Contact> Contacts;
-
-class User
+class User : public BaseUser
 {
 public:
+    inline User(int                id,
+                const std::string& userName,
+                const std::string& password,
+                const std::string& firstName,
+                const std::string& lastName);
 
-    inline const UserCredentials& getUserCredentials() const;
-    inline void setUserCredentials(const UserCredentials& userCredentials);
-
-    inline const UserDetails& getUserDetails() const;
-    inline void setUserDetails(const UserDetails& userDetails);
+    inline const std::string& getPassword() const;
+    inline void setPassword(const std::string& getPassword);
 
 private:
-    UserCredentials m_userCredentials;
-    UserDetails m_userDetails;
+    std::string m_password;
+
 };
 
-#include "User.ipp"
+ #include "User.ipp"
 
 #endif //USER_H
