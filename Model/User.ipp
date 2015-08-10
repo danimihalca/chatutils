@@ -6,8 +6,22 @@ BaseUser::BaseUser(int                id,
                    const std::string& userName,
                    const std::string& firstName,
                    const std::string& lastName) :
-    m_userName(userName)
+    m_id(id),
+    m_userName(userName),
+    m_firstName(firstName),
+    m_lastName(lastName)
 {
+}
+
+
+int BaseUser::getId() const
+{
+    return m_id;
+}
+
+void BaseUser::setId(int id)
+{
+    m_id = m_id;
 }
 
 const std::string& BaseUser::getUserName() const

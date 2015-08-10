@@ -22,6 +22,9 @@ public:
     inline std::string getLastName() const;
     inline void setLastName(const std::string& lastName);
 
+    inline int getId() const;
+    inline void setId(int id);
+
 protected:
     BaseUser() = default;
     inline BaseUser(int                id,
@@ -33,13 +36,15 @@ private:
     std::string m_userName;
     std::string m_firstName;
     std::string m_lastName;
-    int id;
+    int m_id;
 
 };
 
 class UserCredentials
 {
 public:
+	UserCredentials() = default;
+
     inline UserCredentials(const std::string& userName,
                            const std::string& password);
 
@@ -89,7 +94,7 @@ public:
                    const std::string& userName,
                    const std::string& firstName,
                    const std::string& lastName,
-                   CONTACT_STATE      state);
+                   CONTACT_STATE      state = OFFLINE);
 
     inline CONTACT_STATE getState() const;
     inline void setState(CONTACT_STATE state);
@@ -118,3 +123,4 @@ private:
  #include "User.ipp"
 
 #endif //USER_H
+
