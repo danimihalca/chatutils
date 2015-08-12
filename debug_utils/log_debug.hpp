@@ -20,7 +20,7 @@
     #define FUNCTION_NAME __PRETTY_FUNCTION__
 #endif
 
-#define DEBUG_BUFFER_SIZE 255
+#define DEBUG_BUFFER_SIZE 150
 
 #define LOG_DEBUG_METHOD LOG_DEBUG("\n");
 

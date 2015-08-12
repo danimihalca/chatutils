@@ -1,13 +1,12 @@
 #ifndef LOGINRESPONSEJSON_HPP
 #define LOGINRESPONSEJSON_HPP
 
-#include "IResponseJson.hpp"
 
 #include "JsonChatProtocol/common_json_protocol.hpp"
 
 #include <Model/User.hpp>
 
-class LoginResponseJson: public IResponseJson
+class LoginResponseJson
 {
 public:
     LoginResponseJson() = default;

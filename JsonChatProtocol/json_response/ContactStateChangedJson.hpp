@@ -1,11 +1,9 @@
 #ifndef CONTACTSTATECHANGEDJSON_HPP
 #define CONTACTSTATECHANGEDJSON_HPP
 
-#include "IResponseJson.hpp"
-
 #include "Model/User.hpp"
 
-class ContactStateChangedJson: public IResponseJson
+class ContactStateChangedJson
 {
 
 public:

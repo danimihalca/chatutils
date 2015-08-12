@@ -1,13 +1,11 @@
 #ifndef RECEIVECONTACTSJSON_HPP
 #define RECEIVECONTACTSJSON_HPP
 
-#include "IResponseJson.hpp"
-
 #include <vector>
 
 #include <Model/User.hpp>
 
-class ReceiveContactsJson : public IResponseJson
+class ReceiveContactsJson
 {
 public:
     ReceiveContactsJson() = default;

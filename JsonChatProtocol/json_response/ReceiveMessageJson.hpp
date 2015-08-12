@@ -1,11 +1,9 @@
 #ifndef RECEIVEMESSAGEJSON_HPP
 #define RECEIVEMESSAGEJSON_HPP
 
-#include "IResponseJson.hpp"
-
 #include <Model/Message.hpp>
 
-class ReceiveMessageJson: public IResponseJson
+class ReceiveMessageJson
 {
 public:
     ReceiveMessageJson() = default;
