@@ -21,7 +21,7 @@ int BaseUser::getId() const
 
 void BaseUser::setId(int id)
 {
-    m_id = m_id;
+    m_id = id;
 }
 
 const std::string& BaseUser::getUserName() const
@@ -125,6 +125,11 @@ void UserDetails::setFirstName(const std::string& firstName)
 }
 
 
+Contact::Contact(const BaseUser& baseUser, CONTACT_STATE state):
+	BaseUser(baseUser),
+	m_state(state)
+{
+}
 
 
 Contact::Contact(int                id,

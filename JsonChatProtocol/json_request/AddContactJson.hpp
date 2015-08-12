@@ -12,7 +12,7 @@ public:
 	{
 	}
 	
-	const std::string& getUserName()
+	const std::string& getUserName() const
 	{
 		return m_userName;
 	}

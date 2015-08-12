@@ -13,6 +13,12 @@ enum CONTACT_STATE
 class BaseUser
 {
 public:
+	BaseUser() = default;
+	inline BaseUser(int                id,
+					const std::string& userName,
+					const std::string& firstName,
+					const std::string& lastName);
+
     inline const std::string& getUserName() const;
     inline void setUserName(const std::string& userName);
 
@@ -24,13 +30,6 @@ public:
 
     inline int getId() const;
     inline void setId(int id);
-
-protected:
-    BaseUser() = default;
-    inline BaseUser(int                id,
-                    const std::string& userName,
-                    const std::string& firstName,
-                    const std::string& lastName);
 
 private:
     std::string m_userName;
@@ -89,7 +88,7 @@ class Contact : public BaseUser
 {
 public:
     Contact() = default;
-
+	inline Contact(const BaseUser& baseUser, CONTACT_STATE state = OFFLINE);
     inline Contact(int                id,
                    const std::string& userName,
                    const std::string& firstName,

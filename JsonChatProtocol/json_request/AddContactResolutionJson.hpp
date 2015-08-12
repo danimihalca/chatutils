@@ -13,12 +13,12 @@ public:
 	{
 	}
 
-	const std::string& getUserName()
+	const std::string& getUserName() const
 	{
 		return m_userName;
 	}
 
-	bool hasAccepted()
+	bool hasAccepted() const
 	{
 		return m_accepted;
 	}

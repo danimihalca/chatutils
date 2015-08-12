@@ -12,7 +12,7 @@ public:
 	{
 	}
 
-	const int getContactId()
+	const int getContactId() const
 	{
 		return m_contactId;
 	}
