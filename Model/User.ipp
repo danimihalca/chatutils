@@ -125,7 +125,7 @@ void UserDetails::setFirstName(const std::string& firstName)
 }
 
 
-Contact::Contact(const BaseUser& baseUser, CONTACT_STATE state):
+Contact::Contact(const BaseUser& baseUser, USER_STATE state):
 	BaseUser(baseUser),
 	m_state(state)
 {
@@ -136,18 +136,18 @@ Contact::Contact(int                id,
                  const std::string& userName,
                  const std::string& firstName,
                  const std::string& lastName,
-                 CONTACT_STATE      state) :
+                 USER_STATE      state) :
     BaseUser(id,userName,firstName,lastName),
     m_state(state)
 {
 }
 
-CONTACT_STATE Contact::getState() const
+USER_STATE Contact::getState() const
 {
     return m_state;
 }
 
-void Contact::setState(CONTACT_STATE state)
+void Contact::setState(USER_STATE state)
 {
     m_state = state;
 }

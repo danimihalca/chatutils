@@ -18,18 +18,18 @@ public:
         m_contactId = contactId;
     }
 
-    CONTACT_STATE getContactState() const
+    USER_STATE getContactState() const
     {
         return m_state;
     }
-    void setContactState(const CONTACT_STATE& state)
+    void setContactState(const USER_STATE& state)
     {
         m_state = state;
     }
 
 private:
     int m_contactId;
-    CONTACT_STATE m_state;
+    USER_STATE m_state;
 };
 
 #endif // CONTACTSTATECHANGEDJSON_HPP

@@ -4,10 +4,13 @@
  #include <string>
  #include <vector>
 
-enum CONTACT_STATE
+enum USER_STATE
 {
     OFFLINE,
-    ONLINE
+    ONLINE,
+    IDLE,
+    BUSY,
+    INVISIBLE = 100
 };
 
 class BaseUser
@@ -88,18 +91,18 @@ class Contact : public BaseUser
 {
 public:
     Contact() = default;
-	inline Contact(const BaseUser& baseUser, CONTACT_STATE state = OFFLINE);
+        inline Contact(const BaseUser& baseUser, USER_STATE state);
     inline Contact(int                id,
                    const std::string& userName,
                    const std::string& firstName,
                    const std::string& lastName,
-                   CONTACT_STATE      state = OFFLINE);
+                   USER_STATE      state = OFFLINE);
 
-    inline CONTACT_STATE getState() const;
-    inline void setState(CONTACT_STATE state);
+    inline USER_STATE getState() const;
+    inline void setState(USER_STATE state);
 
 private:
-    CONTACT_STATE m_state;
+    USER_STATE m_state;
 };
 
 class User : public BaseUser

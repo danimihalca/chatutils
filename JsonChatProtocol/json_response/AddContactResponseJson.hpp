@@ -3,13 +3,15 @@
 
 #include <string>
 
+#include <JsonChatProtocol/common_json_protocol.hpp>
+
 class AddContactResponseJson
 {
 public:
         AddContactResponseJson() = default;
-        inline AddContactResponseJson(const std::string& userName, bool accepted) :
+        inline AddContactResponseJson(const std::string& userName, ADD_STATUS status) :
                 m_userName(userName),
-                m_accepted(accepted)
+                m_status(status)
         {
         }
 
@@ -18,14 +20,14 @@ public:
                 return m_userName;
         }
 
-        bool hasAccepted() const
+        ADD_STATUS getStatus() const
         {
-                return m_accepted;
+                return m_status;
         }
 
 private:
         std::string m_userName;
-        bool m_accepted;
+        ADD_STATUS m_status;
 };
 
 #endif //ADDCONTACTRESPONSEJSON_HPP
