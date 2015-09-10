@@ -10,13 +10,13 @@ enum USER_STATE
     ONLINE,
     IDLE,
     BUSY,
-    INVISIBLE = 100
+    INVISIBLE
 };
 
 class BaseUser
 {
 public:
-	BaseUser() = default;
+        BaseUser()=default;
 	inline BaseUser(int                id,
 					const std::string& userName,
 					const std::string& firstName,
@@ -45,7 +45,7 @@ private:
 class UserCredentials
 {
 public:
-	UserCredentials() = default;
+        UserCredentials() = default;
 
     inline UserCredentials(const std::string& userName,
                            const std::string& password);

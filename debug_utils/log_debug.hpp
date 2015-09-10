@@ -1,6 +1,7 @@
 #ifndef LOG_DEBUG_H
 #define LOG_DEBUG_H
 
+
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -20,7 +21,7 @@
     #define FUNCTION_NAME __PRETTY_FUNCTION__
 #endif
 
-#define DEBUG_BUFFER_SIZE 150
+#define DEBUG_BUFFER_SIZE 500
 
 #define LOG_DEBUG_METHOD LOG_DEBUG("\n");
 
@@ -32,13 +33,16 @@ inline void LogDebug(const char* tag, const char* format, ...)
 #ifdef ENABLE_LOG_DEBUG
     va_list arguments;
     va_start(arguments,format);
-
+    char initialBuffer[1000];
+    strcpy(initialBuffer,tag);
+    strcpy(initialBuffer+strlen(tag)," ");
+    strcpy(initialBuffer+strlen(tag)+1,format);
 #if defined(ANDROID)
-    __android_log_vprint(ANDROID_LOG_DEBUG,tag,format,arguments);
+    __android_log_vprint(ANDROID_LOG_DEBUG,"ChatClientAPI",initialBuffer,arguments);
 #elif defined (WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
 
         char buffer[DEBUG_BUFFER_SIZE];
-        _vsnprintf_s(buffer, DEBUG_BUFFER_SIZE, DEBUG_BUFFER_SIZE-1, format, arguments);
+        _vsnprintf_s(buffer, DEBUG_BUFFER_SIZE, DEBUG_BUFFER_SIZE-1, initialBuffer, arguments);
         wchar_t bufferW[DEBUG_BUFFER_SIZE];
 
 	size_t ret;
@@ -47,7 +51,6 @@ inline void LogDebug(const char* tag, const char* format, ...)
     buffer[99] = '\0';
     OutputDebugString(bufferW);
 #else
-#define _CRT_SECURE_NO_WARNINGS
     char buffer[DEBUG_BUFFER_SIZE];
     strcpy(buffer,"D/");
     strcat(buffer,tag);
